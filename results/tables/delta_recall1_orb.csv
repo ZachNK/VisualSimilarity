@@ -1,4 +1,0 @@
-transform,Recall@1_before,Recall@1_after,Delta,N
-bright,1.0000,0.0938,-0.9062,32
-flip,1.0000,0.8125,-0.1875,32
-rot90,0.4375,0.0312,-0.4062,32
