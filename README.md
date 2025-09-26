@@ -9,7 +9,9 @@ DINOv2 + FAISS + {ORB+RANSAC, LightGlue+SuperPoint, SuperGlue+SuperPoint} <br />
 
 ## FAISS 인덱스(구축 시)
 
-임베딩 차원: dinov2_utils.get_embeddings(...)의 출력 차원(= DINOv2 Base CLS 토큰 벡터 차원). 코드에서 하드코딩 없이 자동 추출(로그에 dim=으로 기록). <br />
+임베딩 차원: <br />
+- dinov2_utils.get_embeddings(...)의 출력 차원(= DINOv2 Base CLS 토큰 벡터 차원). <br />
+- 코드에서 하드코딩 없이 자동 추출(로그에 dim=으로 기록). <br />
 거리 지표 / 인덱스 타입: faiss.IndexFlatL2(dim) → L2(유클리드), Flat(정확 검색). <br />
 배치/가속: 임베딩 추출 배치 크기 --batch 64(기본). GPU 사용 여부는 Torch/CUDA 가용성에 따름(임베딩 단계). <br />
 
@@ -240,6 +242,7 @@ D:\\<Project File\>\_Projects\dino_test\data\corpora\{visdrone, sodaa, aihub, un
 
 ## 4.9 super2025 + aihub
 (super2025) knk2025@DESKTOP-59ULDOH:/mnt/d/\<Project File\>/_Projects/dino_test/scripts$ python eval_search.py --dataset aihub --k 10
+
 
 
 
