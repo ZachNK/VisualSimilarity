@@ -65,6 +65,7 @@ pip install kornia
 pip install lightglue
 
 
+
 # 1. 이미지 원본(_Datasets → \data\datasets 으로 이동)
 D:\<Project File>\_Datasets\{VisDrone, SODA_A, AiHub}의 데이터들이 D:\<Project File>\_Projects\dino_test\data\datasets\{visdrone, sodaa, aihub, union}로 이동
 
@@ -102,6 +103,8 @@ D:\<Project File>\_Projects\dino_test\data\datasets\{visdrone, sodaa, aihub, uni
 
 ### 2.2.3 AI-Hub 데이터셋 정규화
 (queryGPU) knk2025@DESKTOP-59ULDOH:/mnt/d/<Project File>/_Projects/dino_test/scripts$ python normalize_dataset.py --dataset aihub --convert tiff2jpg --jpeg-quality 92 --verify
+
+
 
 # 3. 검색용 벡터 index 생성기 (파이프라인 3단계)
 D:\<Project File>\_Projects\dino_test\data\corpora\{visdrone, sodaa, aihub, union}\images의 이미지들을 가지고 DINOv2 임베딩 추출하고, 얻은 임베딩을 수직 결합 후 L2 거리 값의 IndexFlatL2로 인덱싱하는 FAISS 인덱스 구축을 한다. 
@@ -161,6 +164,7 @@ D:\<Project File>\_Projects\dino_test\data\corpora\{visdrone, sodaa, aihub, unio
 저장: results/aihub/super/tables/{build_index_runs.csv, build_index_perf_날짜.csv}
 
 
+
 # 4. 쿼리 검색
 - 각 가상환경과 데이터셋별로 쿼리 검색하는 알고리즘
 
@@ -190,6 +194,7 @@ D:\<Project File>\_Projects\dino_test\data\corpora\{visdrone, sodaa, aihub, unio
 
 ## 4.9 super2025 + aihub
 (super2025) knk2025@DESKTOP-59ULDOH:/mnt/d/<Project File>/_Projects/dino_test/scripts$ python eval_search.py --dataset aihub --k 10
+
 
 
 
