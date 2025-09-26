@@ -4,32 +4,25 @@ DINOv2 + FAISS + {ORB+RANSAC, LightGlue+SuperPoint, SuperGlue+SuperPoint} <br />
 
 
 # 개요
-- 현재 코드는 가장 단순·정확한 FAISS L2(flat) 설정을 함. <br />
+- 현재 코드는 가장 단순한 FAISS L2(flat) 설정을 함. <br />
 - IVF/HNSW/PQ 등 고급 파라미터는 쓰지 않음. <br />
 
 ## FAISS 인덱스(구축 시)
 
-임베딩 차원: dinov2_utils.get_embeddings(...)의 출력 차원(= DINOv2 Base CLS 토큰 벡터 차원). 코드에서 하드코딩 없이 자동 추출(로그에 dim=으로 기록).
+임베딩 차원: dinov2_utils.get_embeddings(...)의 출력 차원(= DINOv2 Base CLS 토큰 벡터 차원). 코드에서 하드코딩 없이 자동 추출(로그에 dim=으로 기록). <br />
+거리 지표 / 인덱스 타입: faiss.IndexFlatL2(dim) → L2(유클리드), Flat(정확 검색). <br />
+배치/가속: 임베딩 추출 배치 크기 --batch 64(기본). GPU 사용 여부는 Torch/CUDA 가용성에 따름(임베딩 단계). <br />
 
-거리 지표 / 인덱스 타입: faiss.IndexFlatL2(dim) → L2(유클리드), Flat(정확 검색).
-
-배치/가속: 임베딩 추출 배치 크기 --batch 64(기본). GPU 사용 여부는 Torch/CUDA 가용성에 따름(임베딩 단계).
-
-저장 산출물:
-
+저장 산출물: <br />
 - 인덱스 파일: data/index/<dataset_tag>/faiss_index.bin
-
 - 경로 맵: data/index/<dataset_tag>/image_paths.npy
 
 ## 검색 단계(eval/baseline)
 
-탐색 Top-K: --k(미지정 시 min(10, index.ntotal)).
-
-GPU 사용 방식: GPU가 있으면 CPU 인덱스를 GPU(0)로 클론하고 useFloat16=True로 FP16 검색 활성화. (HNSW 인덱스가 아니어야 GPU 래핑)
-
-정규화: 인덱스 metric이 IP일 때만 L2 정규화하는 코드가 있으나, 실제 인덱스는 L2라 정규화는 적용되지 않음.
-
-결과 기록: baseline 결과/성능 요약 CSV(Recall@K, 임베딩/검색 시간 ms) 저장.
+탐색 Top-K: --k(미지정 시 min(10, index.ntotal)). <br />
+GPU 사용 방식: GPU가 있으면 CPU 인덱스를 GPU(0)로 클론하고 useFloat16=True로 FP16 검색 활성화. (HNSW 인덱스가 아니어야 GPU 래핑) <br />
+정규화: 인덱스 metric이 IP일 때만 L2 정규화하는 코드가 있으나, 실제 인덱스는 L2라 정규화는 적용되지 않음. <br />
+결과 기록: baseline 결과/성능 요약 CSV(Recall@K, 임베딩/검색 시간 ms) 저장. <br />
 
 ## 재정렬(rerank) 단계와 FAISS
 
@@ -247,6 +240,7 @@ D:\\<Project File\>\_Projects\dino_test\data\corpora\{visdrone, sodaa, aihub, un
 
 ## 4.9 super2025 + aihub
 (super2025) knk2025@DESKTOP-59ULDOH:/mnt/d/\<Project File\>/_Projects/dino_test/scripts$ python eval_search.py --dataset aihub --k 10
+
 
 
 
