@@ -4,7 +4,8 @@ DINOv2 + FAISS + {ORB+RANSAC, LightGlue+SuperPoint, SuperGlue+SuperPoint} <br />
 
 
 # 개요
-(결론: 현재 코드는 가장 단순·정확한 FAISS L2(flat) 설정을 씁니다. IVF/HNSW/PQ 등 고급 파라미터는 쓰지 않음) <br />
+- 현재 코드는 가장 단순·정확한 FAISS L2(flat) 설정을 함. <br />
+- IVF/HNSW/PQ 등 고급 파라미터는 쓰지 않음. <br />
 
 ## FAISS 인덱스(구축 시)
 
@@ -246,6 +247,7 @@ D:\\<Project File\>\_Projects\dino_test\data\corpora\{visdrone, sodaa, aihub, un
 
 ## 4.9 super2025 + aihub
 (super2025) knk2025@DESKTOP-59ULDOH:/mnt/d/\<Project File\>/_Projects/dino_test/scripts$ python eval_search.py --dataset aihub --k 10
+
 
 
 
