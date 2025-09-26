@@ -1,5 +1,5 @@
 
-Scene Similarity Retrieval 
+# Scene Similarity Retrieval 
 DINOv2 + FAISS + {ORB+RANSAC, LightGlue+SuperPoint, SuperGlue+SuperPoint}
 
 ** <Project File> : 사용자 임의 로컬 경로
@@ -195,6 +195,7 @@ pip install lightglue
 
 4.9 super2025 + aihub
 # (super2025) knk2025@DESKTOP-59ULDOH:/mnt/d/<Project File>/_Projects/dino_test/scripts$ python eval_search.py --dataset aihub --k 10
+
 
 
 
