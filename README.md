@@ -1,27 +1,26 @@
 
 # Scene Similarity Retrieval 
 DINOv2 + FAISS + {ORB+RANSAC, LightGlue+SuperPoint, SuperGlue+SuperPoint}
+<Project File> : 사용자 임의 로컬 경로
 
-** <Project File> : 사용자 임의 로컬 경로
 
+# 0. 가상환경 준비
 
-0. 가상환경 준비
-
-0.1 공통:
-# Miniforge/Conda가 깔려 있다는 전제
+## 0.1 공통:
+###  Miniforge/Conda가 깔려 있다는 전제
 conda config --add channels conda-forge
 conda config --set channel_priority flexible
 
-# (선택) mamba 설치 — 설치속도↑, 의존성 충돌↓
+### (선택) mamba 설치 — 설치속도↑, 의존성 충돌↓
 conda install -n base -y mamba
 
-# 프로젝트 루트 환경변수(WSL)
+### 프로젝트 루트 환경변수(WSL)
 echo 'export DINO_BASE="/mnt/d/KNK/_KSNU/_Projects/dino_test"' >> ~/.bashrc
 source ~/.bashrc
 
-0.2 orb2025 (ORB+RANSAC 알고리즘 패키지)
+## 0.2 orb2025 (ORB+RANSAC 알고리즘 패키지)
 핵심 패키지: torch+cuda, torchvision, timm, transformers, faiss(권장: GPU), opencv, pandas, numpy, pyyaml
-# 생성
+### 생성
 mamba create -y -n queryGPU python=3.10
 conda activate queryGPU
 
@@ -195,6 +194,7 @@ pip install lightglue
 
 4.9 super2025 + aihub
 # (super2025) knk2025@DESKTOP-59ULDOH:/mnt/d/<Project File>/_Projects/dino_test/scripts$ python eval_search.py --dataset aihub --k 10
+
 
 
 
