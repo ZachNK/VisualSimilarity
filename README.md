@@ -63,12 +63,14 @@ Metric 전환(IP):
 - 미사용(인덱스가 L2이므로 항상 거리=작을수록 유사). <br />
 
 
-\<Project File\> : 사용자 임의 로컬 경로 <br />
+
 
 
 # 0. 가상환경 준비
 
 ## 0.1 공통:
+- \<Project File\> : 사용자 임의 로컬 경로 <br />
+
 - Miniforge/Conda가 깔려 있다는 전제
 conda config --add channels conda-forge
 conda config --set channel_priority flexible
@@ -255,6 +257,7 @@ D:\\<Project File\>\_Projects\dino_test\data\corpora\{visdrone, sodaa, aihub, un
 
 ## 4.9 super2025 + aihub
 (super2025) knk2025@DESKTOP-59ULDOH:/mnt/d/\<Project File\>/_Projects/dino_test/scripts$ python eval_search.py --dataset aihub --k 10
+
 
 
 
