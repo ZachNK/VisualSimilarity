@@ -2,52 +2,52 @@
 # Scene Similarity Retrieval 
 DINOv2 + FAISS + {ORB+RANSAC, LightGlue+SuperPoint, SuperGlue+SuperPoint} <br />
 
-<p>
-  # 개요
-  (결론: 현재 코드는 가장 단순·정확한 FAISS L2(flat) 설정을 씁니다. IVF/HNSW/PQ 등 고급 파라미터는 쓰지 않음) <br />
-  
-  ## FAISS 인덱스(구축 시)
-  
-  임베딩 차원: dinov2_utils.get_embeddings(...)의 출력 차원(= DINOv2 Base CLS 토큰 벡터 차원). 코드에서 하드코딩 없이 자동 추출(로그에 dim=으로 기록).
-  
-  거리 지표 / 인덱스 타입: faiss.IndexFlatL2(dim) → L2(유클리드), Flat(정확 검색).
-  
-  배치/가속: 임베딩 추출 배치 크기 --batch 64(기본). GPU 사용 여부는 Torch/CUDA 가용성에 따름(임베딩 단계).
-  
-  저장 산출물:
-  
-  - 인덱스 파일: data/index/<dataset_tag>/faiss_index.bin
-  
-  - 경로 맵: data/index/<dataset_tag>/image_paths.npy
-  
-  ## 검색 단계(eval/baseline)
-  
-  탐색 Top-K: --k(미지정 시 min(10, index.ntotal)).
-  
-  GPU 사용 방식: GPU가 있으면 CPU 인덱스를 GPU(0)로 클론하고 useFloat16=True로 FP16 검색 활성화. (HNSW 인덱스가 아니어야 GPU 래핑)
-  
-  정규화: 인덱스 metric이 IP일 때만 L2 정규화하는 코드가 있으나, 실제 인덱스는 L2라 정규화는 적용되지 않음.
-  
-  결과 기록: baseline 결과/성능 요약 CSV(Recall@K, 임베딩/검색 시간 ms) 저장.
-  
-  ## 재정렬(rerank) 단계와 FAISS
-  
-  FAST 스크립트(LightGlue/SuperGlue): --reuse-baseline을 요구 → FAISS 재검색 없음, baseline의 Top-K 후보·거리 그대로 사용 후 기하 매칭으로 재정렬.
-  
-  ORB FAST 스크립트: --reuse-baseline 없을 때만 인덱스를 불러 그 자리에서 FAISS 검색 수행. 이 경우:
-  
-  인덱스 파일 로드: faiss_index.bin
-  
-  GPU 래핑: GPU가 있으면 index_cpu_to_all_gpus(...)로 전 GPU에 분산(옵션 기본). HNSW면 CPU 유지.
-  
-  Top-K: --k(기본 20).
-  
-  ## 안 쓰는(또는 고정된) FAISS 파라미터
-  
-  - nlist, nprobe, efSearch/efConstruction, PQ(압축), OPQ, IVF, HNSW: 미사용. (코드는 전부 IndexFlatL2 기반)
-  
-  Metric 전환(IP): 미사용(인덱스가 L2이므로 항상 거리=작을수록 유사).
-</p>
+
+# 개요
+(결론: 현재 코드는 가장 단순·정확한 FAISS L2(flat) 설정을 씁니다. IVF/HNSW/PQ 등 고급 파라미터는 쓰지 않음) <br />
+
+## FAISS 인덱스(구축 시)
+
+임베딩 차원: dinov2_utils.get_embeddings(...)의 출력 차원(= DINOv2 Base CLS 토큰 벡터 차원). 코드에서 하드코딩 없이 자동 추출(로그에 dim=으로 기록).
+
+거리 지표 / 인덱스 타입: faiss.IndexFlatL2(dim) → L2(유클리드), Flat(정확 검색).
+
+배치/가속: 임베딩 추출 배치 크기 --batch 64(기본). GPU 사용 여부는 Torch/CUDA 가용성에 따름(임베딩 단계).
+
+저장 산출물:
+
+- 인덱스 파일: data/index/<dataset_tag>/faiss_index.bin
+
+- 경로 맵: data/index/<dataset_tag>/image_paths.npy
+
+## 검색 단계(eval/baseline)
+
+탐색 Top-K: --k(미지정 시 min(10, index.ntotal)).
+
+GPU 사용 방식: GPU가 있으면 CPU 인덱스를 GPU(0)로 클론하고 useFloat16=True로 FP16 검색 활성화. (HNSW 인덱스가 아니어야 GPU 래핑)
+
+정규화: 인덱스 metric이 IP일 때만 L2 정규화하는 코드가 있으나, 실제 인덱스는 L2라 정규화는 적용되지 않음.
+
+결과 기록: baseline 결과/성능 요약 CSV(Recall@K, 임베딩/검색 시간 ms) 저장.
+
+## 재정렬(rerank) 단계와 FAISS
+
+FAST 스크립트(LightGlue/SuperGlue): --reuse-baseline을 요구 → FAISS 재검색 없음, baseline의 Top-K 후보·거리 그대로 사용 후 기하 매칭으로 재정렬.
+
+ORB FAST 스크립트: --reuse-baseline 없을 때만 인덱스를 불러 그 자리에서 FAISS 검색 수행. 이 경우:
+
+인덱스 파일 로드: faiss_index.bin
+
+GPU 래핑: GPU가 있으면 index_cpu_to_all_gpus(...)로 전 GPU에 분산(옵션 기본). HNSW면 CPU 유지.
+
+Top-K: --k(기본 20).
+
+## 안 쓰는(또는 고정된) FAISS 파라미터
+
+- nlist, nprobe, efSearch/efConstruction, PQ(압축), OPQ, IVF, HNSW: 미사용. (코드는 전부 IndexFlatL2 기반)
+
+Metric 전환(IP): 미사용(인덱스가 L2이므로 항상 거리=작을수록 유사).
+
 
 
 
@@ -246,6 +246,7 @@ D:\\<Project File\>\_Projects\dino_test\data\corpora\{visdrone, sodaa, aihub, un
 
 ## 4.9 super2025 + aihub
 (super2025) knk2025@DESKTOP-59ULDOH:/mnt/d/\<Project File\>/_Projects/dino_test/scripts$ python eval_search.py --dataset aihub --k 10
+
 
 
 
