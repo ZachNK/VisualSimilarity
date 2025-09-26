@@ -1,4 +1,4 @@
-<!-- 
+
 Scene Similarity Retrieval 
 DINOv2 + FAISS + {ORB+RANSAC, LightGlue+SuperPoint, SuperGlue+SuperPoint}
 
@@ -199,6 +199,5 @@ pip install lightglue
 
 
 
--->
 
 
