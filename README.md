@@ -9,27 +9,8 @@ DINOv2 + FAISS + {ORB+RANSAC, LightGlue+SuperPoint, SuperGlue+SuperPoint} <br />
 
 ## Datasets 경로
 
-D:\<Project File>\_Projects\dino_test\data\corpora\   -----   (4 folder(s))
-|-- aihub/   -----   (4 folder(s))
-|   |-- gt/   -----   (empty)
-|   |-- images/   -----   (.jpg 51210 file(s))
-|   |-- index/   -----   (.csv 1 file(s))
-|   \-- queries/   -----   (.jpg 1075410 file(s))
-|-- sodaa/   -----   (4 folder(s))
-|   |-- gt/   -----   (empty)
-|   |-- images/   -----   (.jpg 2513 file(s))
-|   |-- index/   -----   (.csv 1 file(s))
-|   \-- queries/   -----   (.jpg 52773 file(s))
-|-- union/   -----   (4 folder(s))
-|   |-- gt/   -----   (empty)
-|   |-- images/   -----   (.jpg 87158 file(s))
-|   |-- index/   -----   (.csv 1 file(s))
-|   \-- queries/   -----   (.jpg 1094136 file(s))
-\-- visdrone/   -----   (4 folder(s))
-    |-- gt/   -----   (empty)
-    |-- images/   -----   (.jpg 33434 file(s))
-    |-- index/   -----   (.csv 1 file(s))
-    \-- queries/   -----   (.jpg 702116 file(s))
+<img width="540" height="445" alt="화면 캡처 2025-09-29 132050" src="https://github.com/user-attachments/assets/954f7dc2-4cd5-42ac-b82d-2b8d369414b8" />
+
 
 ## FAISS 인덱스(구축 시)
 
@@ -281,6 +262,7 @@ D:\\<Project File\>\_Projects\dino_test\data\corpora\{visdrone, sodaa, aihub, un
 
 ## 4.9 super2025 + aihub
 (super2025) knk2025@DESKTOP-59ULDOH:/mnt/d/\<Project File\>/_Projects/dino_test/scripts$ python eval_search.py --dataset aihub --k 10
+
 
 
 
