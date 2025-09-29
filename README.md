@@ -31,7 +31,7 @@ DINOv2 + FAISS + {ORB+RANSAC, LightGlue+SuperPoint, SuperGlue+SuperPoint} <br />
 ## 검색 단계(eval/baseline)
 
 탐색 Top-K: 
-- --k(미지정 시 min(10, index.ntotal)). <br />
+- --k. <br />
 
 GPU 사용 방식:
 - GPU가 있으면 CPU 인덱스를 GPU(0)로 클론하고 useFloat16=True로 FP16 검색 활성화. (HNSW 인덱스가 아니어야 GPU 래핑) <br />
@@ -57,15 +57,15 @@ GPU 래핑:
 - GPU가 있으면 index_cpu_to_all_gpus(...)로 전 GPU에 분산(옵션 기본). HNSW면 CPU 유지. <br />
 
 Top-K:
----k(기본 20). <br />
+---k(= 1, 5, 10, 20). <br />
 
 ## 안 쓰는(또는 고정된) FAISS 파라미터
 
 nlist, nprobe, efSearch/efConstruction, PQ(압축), OPQ, IVF, HNSW:
-- 미사용. (코드는 전부 IndexFlatL2 기반) <br />
+- 미사용 (코드는 전부 IndexFlatL2 기반). <br />
 
 Metric 전환(IP): 
-- 미사용(인덱스가 L2이므로 항상 거리=작을수록 유사). <br />
+- 미사용 (인덱스가 L2이므로 항상 거리=작을수록 유사). <br />
 
 
 
@@ -262,6 +262,7 @@ D:\\<Project File\>\_Projects\dino_test\data\corpora\{visdrone, sodaa, aihub, un
 
 ## 4.9 super2025 + aihub
 (super2025) knk2025@DESKTOP-59ULDOH:/mnt/d/\<Project File\>/_Projects/dino_test/scripts$ python eval_search.py --dataset aihub --k 10
+
 
 
 
