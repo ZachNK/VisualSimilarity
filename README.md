@@ -103,15 +103,10 @@ Metric 전환(IP):
       mamba install -y opencv numpy pandas scipy pillow tqdm pyyaml rich
       pip install timm transformers einops huggingface-hub
 
-# FAISS (선택 1: GPU 권장)
+# FAISS
 - cu12 계열: pip 패키지명이 시기에 따라 "faiss-gpu-cu12", "faiss-cuda12x" 등으로 다를 수 있음
-- 먼저 아래를 시도하고, 실패 시 선택 2로 (CPU) 진행
 
       pip install faiss-gpu-cu12 || true
-
-- FAISS (선택 2: CPU 대안 — GPU가 안 맞을 때 안정적)
-
-      pip install faiss-cpu
 
 0.3 light2025 (LightGlue+SuperPoint 알고리즘 패키지)
 - 핵심 패키지: opencv-contrib(xfeatures 포함), numpy/scipy, pandas, pyyaml
@@ -302,6 +297,7 @@ D:\\<Project File\>\_Projects\dino_test\data\corpora\{visdrone, sodaa, aihub, un
 ## 4.9 super2025 + aihub
 
       (super2025) knk2025@DESKTOP-59ULDOH:/mnt/d/\<Project File\>/_Projects/dino_test/scripts$ python eval_search.py --dataset aihub --k 10
+
 
 
 
