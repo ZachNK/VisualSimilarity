@@ -7,6 +7,30 @@ DINOv2 + FAISS + {ORB+RANSAC, LightGlue+SuperPoint, SuperGlue+SuperPoint} <br />
 - 현재 코드는 가장 단순한 FAISS L2(flat) 설정을 함. <br />
 - IVF/HNSW/PQ 등 고급 파라미터는 쓰지 않음. <br />
 
+## Datasets 경로
+
+D:\<Project File>\_Projects\dino_test\data\corpora\   -----   (4 folder(s))
+|-- aihub/   -----   (4 folder(s))
+|   |-- gt/   -----   (empty)
+|   |-- images/   -----   (.jpg 51210 file(s))
+|   |-- index/   -----   (.csv 1 file(s))
+|   \-- queries/   -----   (.jpg 1075410 file(s))
+|-- sodaa/   -----   (4 folder(s))
+|   |-- gt/   -----   (empty)
+|   |-- images/   -----   (.jpg 2513 file(s))
+|   |-- index/   -----   (.csv 1 file(s))
+|   \-- queries/   -----   (.jpg 52773 file(s))
+|-- union/   -----   (4 folder(s))
+|   |-- gt/   -----   (empty)
+|   |-- images/   -----   (.jpg 87158 file(s))
+|   |-- index/   -----   (.csv 1 file(s))
+|   \-- queries/   -----   (.jpg 1094136 file(s))
+\-- visdrone/   -----   (4 folder(s))
+    |-- gt/   -----   (empty)
+    |-- images/   -----   (.jpg 33434 file(s))
+    |-- index/   -----   (.csv 1 file(s))
+    \-- queries/   -----   (.jpg 702116 file(s))
+
 ## FAISS 인덱스(구축 시)
 
 임베딩 차원: <br />
@@ -257,6 +281,7 @@ D:\\<Project File\>\_Projects\dino_test\data\corpora\{visdrone, sodaa, aihub, un
 
 ## 4.9 super2025 + aihub
 (super2025) knk2025@DESKTOP-59ULDOH:/mnt/d/\<Project File\>/_Projects/dino_test/scripts$ python eval_search.py --dataset aihub --k 10
+
 
 
 
